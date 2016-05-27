@@ -24,7 +24,7 @@ class  Crud extends CI_Controller{
     public function create(){
         //validação do form
         //'nome do campo no form', 'NOME DA MSG DE VALIDACAO','regras'
-        //trim=elimina os espaços
+        //trim: elimina os espaços
         //ucwords: letras maiusculas
         $this->form_validation->set_rules('Nome','NOME','trim|max_length[50]|ucwords');
         $this->form_validation->set_message('is_unique','Este %s já está cadastrado no sistema.');
@@ -57,18 +57,25 @@ class  Crud extends CI_Controller{
     }
 
     public function update(){
+                //********** ULTIMO CAMPO NÃO CONTINUA VISUALIZADO DEPOIS DA ALTERAÇÃO.
+
         //validação do form
         //'nome do campo no form', 'NOME DA MSG DE VALIDACAO','regras'
         //trim=elimina os espaços
-        //ucwords: letras maiusculas
-        $this->form_validation->set_rules('nome','NOME','trim|required|max_length[50]|ucwords');
-        $this->form_validation->set_rules('nome_logmein','NOME_LOGMEIN','trim|required|strtolower|is_unique[clientes.nome_logmein]');//
-        $this->form_validation->set_message('matches','O campo %s está diferente do campo %s');
-        $this->form_validation->set_rules('senha2','REPITA A SENHA','trim|required|strtolower|matches[senha]');
+        //ucwords: Converte para maiúsculas o primeiro caractere de cada palavra
+        //strtolower: Retorna string com todos os caracteres do alfabeto convertidos para minúsculas.
+        $this->form_validation->set_rules('nome','NOME','trim|max_length[50]|ucwords');
+        $this->form_validation->set_rules('nome_logmein','NOME_LOGMEIN','trim');
+        //$this->form_validation->set_message('matches','O campo %s está diferente do campo %s');
+        $this->form_validation->set_rules('cod_acesso','COD_ACESSO','trim');
+        $this->form_validation->set_rules('usuario_win','USUARIO_WIN','trim');
+        $this->form_validation->set_rules('senha_win','SENHA_WIN','trim');
+        $this->form_validation->set_rules('win_server','WIN_SERVER','trim');
+
 
         if($this->form_validation->run()==TRUE):
-            $dados = elements(array('nome','senha'),$this->input->post());
-            $dados['senha'] = md5($dados['senha']);
+            $dados = elements(array('nome_logmein','cod_acesso','usuario_win','senha_win','win_server'),$this->input->post());
+//            $dados['senha_win'] = md5($dados['senha_win']);
             $this->crud->do_update($dados,array('id'=>$this->input->post('idusuario')));
         endif;
 

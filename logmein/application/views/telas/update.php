@@ -10,16 +10,20 @@ $iduser = $this->uri->segment(3);
         echo '<p>'.$this->session->flashdata('edicaook').'</p>';
     endif;
 
-echo form_label('Nome completo');
-echo form_input(array('name'=>'nome'),set_value('nome',$query->nome),'autofocus');
-echo form_label('Email');
-echo form_input(array('name'=>'email'),set_value('email',$query->email),'disabled="disabled"');
-echo form_label('Login');
-echo form_input(array('name'=>'login'),set_value('login',$query->login),'disabled="disabled"');
-echo form_label('Senha');
-echo form_password(array('name'=>'senha'),set_value('senha'));
-echo form_label('Repita a Senha');
-echo form_password(array('name'=>'senha2'),set_value('senha2'));
+//**********TRES ULTIMOS CAMPOS ESTAO OCULTOS COMO SENHA, CORRIGIR - OK
+echo form_label('Nome');
+echo form_input(array('name'=>'nome'),set_value('nome',$query->nome),'disabled="disabled"');
+echo form_label('Nome Logmein');
+echo form_input(array('name'=>'nome_logmein'),set_value('nome_logmein',$query->nome_logmein),'autofocus');
+echo form_label('Cod Acesso');
+echo form_input(array('name'=>'cod_acesso'),set_value('cod_acesso',$query->cod_acesso));
+echo form_label('Usuário Windows');
+echo form_input(array('name'=>'usuario_win'),set_value('usuario_win',$query->usuario_win));
+echo form_label('Senha Windows');
+echo form_input(array('name'=>'senha_win'),set_value('senha_win',$query->senha_win));
+echo form_label('Win Server');
+echo form_input(array('name'=>'win_server'),set_value('win_server',$query->win_server));
+
 echo form_submit(array('name'=>'cadastrar'),'Alterar Dados');
 echo form_hidden('idusuario',$query->id);
 echo form_close();

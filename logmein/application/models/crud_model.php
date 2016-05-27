@@ -13,7 +13,8 @@ class Crud_model extends CI_Model{
     public function do_update($dados=NULL,$condicao=NULL){
         if ($dados!=NULL && $condicao!=NULL):
             $this->db->update('clientes',$dados, $condicao);
-            $this->session->set_flashdata('edicaook','Cadastro alteradoo com sucesso!');
+            $this->session->set_flashdata('edicaook','Cadastro alterado com sucesso!');
+            //redirect('crud/update');
             redirect(current_url());
         endif;
     }
